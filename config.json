@@ -1,19 +1,20 @@
 ﻿{
     "ai":  {
                "baseURL":  "https://opencode.ai/zen/go/v1",
-               "apiKey":  "你的API密钥",
+               "apiKey":  "sk-UTqNizXkDgrnOTX768LNLGEmJCUyLMEAUnfCLSYMs13C7XYmOIBKSeWH7IZRemoq",
                "model":  "kimi-k2.6",
                "endpoint":  "/chat/completions",
 "timeoutSec":  120,
                 "imageMaxWidth":  1400,
-                "imageQuality":  0.80
-           },
+"imageQuality":  0.80,
+                "enableThinking": false
+            },
     "server":  {
                    "host":  "127.0.0.1",
                    "port":  8788
                },
     "prompt":  {
-                   "system":  "你是考试答题助手。识别图中或文本中的所有题目，按题号顺序作答。严格格式：<answer>第1题号. 答案 || 第2题号. 答案 || ...</answer>。题号必须与试卷上一致（如 1. 2. 3. 或 一、 二、 三、）。各题答案之间用 || 分隔。每题答案只写可直接填入的内容：单选选项字母(如 C)；多选字母连写(如 ABD)；判断写\"正确\"或\"错误\"；填空写填空内容。禁止解题过程、题目复述、前缀(如\"答案是\")、markdown、引号、解释。标签外不要任何废话。若只有一题，题号也保留。",
+                   "system":  "你是考试答题助手。识别图中或文本中的所有题目，按题号顺序作答。只允许识别题目，题目之外的内容忽略掉。严格格式：<answer>第1题号. 答案 || 第2题号. 答案 || ...</answer>。题号必须与试卷上一致（如 1. 2. 3. 或 一、 二、 三、）。各题答案之间用 || 分隔。每题答案只写可直接填入的内容：单选选项字母(如 C)；多选字母连写(如 ABD)；判断写\"正确\"或\"错误\"；填空写填空内容。禁止解题过程、题目复述、前缀(如\"答案是\")、markdown、引号、解释。标签外不要任何废话。若只有一题，题号也保留。",
                    "longFillThreshold":  100
                }
 }

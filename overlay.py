@@ -20,6 +20,7 @@ IMG_MAX_W  = int(CFG['ai'].get('imageMaxWidth', 1400))
 IMG_QUAL   = int(float(CFG['ai'].get('imageQuality', 0.85)) * 100)
 SYS_PROMPT = CFG['prompt']['system']
 LONG_THRESH= int(CFG['prompt'].get('longFillThreshold', 100))
+THINKING  = bool(CFG['ai'].get('enableThinking', True))
 
 cache_text = ''
 user32 = ctypes.windll.user32
@@ -82,6 +83,8 @@ def invoke_ai(mode, text=None, image_b64=None, debug_raw=False):
             {'role': 'user', 'content': content}
         ]
     }
+    if not THINKING:
+        payload['enable_thinking'] = False
     headers = {
         'Authorization': f'Bearer {AI_KEY}',
         'User-Agent': 'SuperExam/1.0',
@@ -129,7 +132,7 @@ class OverlayApp:
         t = threading.Thread(target=self._topmost_loop, daemon=True)
         t.start()
 
-        self.set_text('就绪：Ctrl+Shift+1 截图答题 | Ctrl+Shift+2 收集剪贴板 | Ctrl+Shift+3 解题 | Ctrl+Shift+0 退出')
+        self.set_text('就绪：Ctrl+Shift+1 截图答题 | Ctrl+Shift+2 收集剪贴板 | Ctrl+Shift+3 解题 | Ctrl+Shift+9 退出')
 
     def _topmost_loop(self):
         while not self._stop_flag.is_set():
@@ -206,7 +209,7 @@ def handle_hotkey(combo_str):
             return
         set_status('正在分析缓存内容…')
         threading.Thread(target=_do_solve, args=(cache_text,), daemon=True).start()
-    elif key == '0':
+    elif key == '9':
         set_status('退出中…')
         if app: app.quit()
 
@@ -246,7 +249,7 @@ def main():
         '<ctrl>+<shift>+1': lambda: handle_hotkey('<ctrl>+<shift>+1'),
         '<ctrl>+<shift>+2': lambda: handle_hotkey('<ctrl>+<shift>+2'),
         '<ctrl>+<shift>+3': lambda: handle_hotkey('<ctrl>+<shift>+3'),
-        '<ctrl>+<shift>+o': lambda: handle_hotkey('<ctrl>+<shift>+o'),
+        '<ctrl>+<shift>+9': lambda: handle_hotkey('<ctrl>+<shift>+9'),
     }
     hk = keyboard.GlobalHotKeys(hotkeys)
     hk.start()
