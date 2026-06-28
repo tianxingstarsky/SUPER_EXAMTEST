@@ -61,7 +61,7 @@ pyinstaller --noconfirm --onefile --windowed --name overlay overlay.py
 | `Ctrl+Shift+1` | **截屏答题** | 截全屏 → 多模态大模型识别题目 → 顶部横条显示带题号的答案 |
 | `Ctrl+Shift+2` | **收集剪贴板** | 当前剪贴板内容追加进缓存（可多次按，以 `-----` 分段） |
 | `Ctrl+Shift+N` | **解题** | 把缓存内容整批发给大模型；>100 字答案会自动写入剪贴板供粘贴 |
-| `Ctrl+Shift+0` | **退出** | 关闭悬浮助手 |
+| `Ctrl+Shift+9` | **退出** | 关闭悬浮助手 |
 
 > 采用数字键 `1/2/3/0`：浏览器原生 `Ctrl+Shift+字母` 几乎都被占用（P=打印 / M=菜单 / B=Edge 收藏栏 / Y=史无前例的扩展 / N=无痕窗口 / K=浏览器自带等），而 `Ctrl+Shift+数字` 主流浏览器均未默认绑定，最大化避开冲突。
 > 如需改键，打开 `overlay.py` 修改 `<ctrl>+<shift>+1/2/3/0` 四处与 `handle_hotkey` 内 `if key == ...` 即可，再 PyInstaller 重新打包。
