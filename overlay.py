@@ -129,7 +129,7 @@ class OverlayApp:
         t = threading.Thread(target=self._topmost_loop, daemon=True)
         t.start()
 
-        self.set_text('就绪：Ctrl+Shift+Y 截图答题 | Ctrl+Shift+K 收集剪贴板 | Ctrl+Shift+N 解题 | Ctrl+Shift+O 退出')
+        self.set_text('就绪：Ctrl+Shift+1 截图答题 | Ctrl+Shift+2 收集剪贴板 | Ctrl+Shift+3 解题 | Ctrl+Shift+0 退出')
 
     def _topmost_loop(self):
         while not self._stop_flag.is_set():
@@ -178,13 +178,13 @@ def set_status(s):
     if app: app.set_text(s)
 
 def handle_hotkey(combo_str):
-    # combo_str 形如 '<ctrl>+<shift>+y'
+    # combo_str 形如 '<ctrl>+<shift>+1'
     global cache_text
     key = combo_str.split('+')[-1].lower()
-    if key == 'y':
+    if key == '1':
         set_status('正在分析截图…')
         threading.Thread(target=_do_screenshot, daemon=True).start()
-    elif key == 'k':
+    elif key == '2':
         try:
             root_tmp = tk.Tk(); root_tmp.withdraw()
             t = root_tmp.clipboard_get()
@@ -200,13 +200,13 @@ def handle_hotkey(combo_str):
             set_status(f'已缓存 {len(cache_text)} 字')
         else:
             set_status('剪贴板为空')
-    elif key == 'n':
+    elif key == '3':
         if not cache_text:
-            set_status('缓存为空，先按 Ctrl+Shift+K 收集题目内容')
+            set_status('缓存为空，先按 Ctrl+Shift+2 收集题目内容')
             return
         set_status('正在分析缓存内容…')
         threading.Thread(target=_do_solve, args=(cache_text,), daemon=True).start()
-    elif key == 'o':
+    elif key == '0':
         set_status('退出中…')
         if app: app.quit()
 
@@ -243,9 +243,9 @@ def main():
 
     # pynput 全局热键
     hotkeys = {
-        '<ctrl>+<shift>+y': lambda: handle_hotkey('<ctrl>+<shift>+y'),
-        '<ctrl>+<shift>+k': lambda: handle_hotkey('<ctrl>+<shift>+k'),
-        '<ctrl>+<shift>+n': lambda: handle_hotkey('<ctrl>+<shift>+n'),
+        '<ctrl>+<shift>+1': lambda: handle_hotkey('<ctrl>+<shift>+1'),
+        '<ctrl>+<shift>+2': lambda: handle_hotkey('<ctrl>+<shift>+2'),
+        '<ctrl>+<shift>+3': lambda: handle_hotkey('<ctrl>+<shift>+3'),
         '<ctrl>+<shift>+o': lambda: handle_hotkey('<ctrl>+<shift>+o'),
     }
     hk = keyboard.GlobalHotKeys(hotkeys)

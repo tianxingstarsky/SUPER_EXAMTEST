@@ -1,4 +1,4 @@
-# 🎓 SUPER_EXAMTEST
+﻿# 🎓 SUPER_EXAMTEST
 
 > 一个超好用的、基于多模态大模型 API 的计算机机考考试神器  
 > **截图即答 · 全局热键 · 顶部悬浮显示 · 零依赖即插即用**
@@ -58,13 +58,13 @@ pyinstaller --noconfirm --onefile --windowed --name overlay overlay.py
 
 | 快捷键 | 功能 | 说明 |
 |---|---|---|
-| `Ctrl+Shift+Y` | **截屏答题** | 截全屏 → 多模态大模型识别题目 → 顶部横条显示带题号的答案 |
-| `Ctrl+Shift+K` | **收集剪贴板** | 当前剪贴板内容追加进缓存（可多次按，以 `-----` 分段） |
+| `Ctrl+Shift+1` | **截屏答题** | 截全屏 → 多模态大模型识别题目 → 顶部横条显示带题号的答案 |
+| `Ctrl+Shift+2` | **收集剪贴板** | 当前剪贴板内容追加进缓存（可多次按，以 `-----` 分段） |
 | `Ctrl+Shift+N` | **解题** | 把缓存内容整批发给大模型；>100 字答案会自动写入剪贴板供粘贴 |
-| `Ctrl+Shift+O` | **退出** | 关闭悬浮助手 |
+| `Ctrl+Shift+0` | **退出** | 关闭悬浮助手 |
 
-> 键位刻意避开浏览器原生快捷键：`Ctrl+Shift+P`（打印）/`Ctrl+Shift+M`（菜单）/`Ctrl+Shift+B`（Edge 收藏栏）均不冲突。
-> 如需改键，打开 `overlay.py` 修改 `<ctrl>+<shift>+y/k/n/o` 四处与 `handle_hotkey` 内 `if key == ...` 即可，再 PyInstaller 重新打包。
+> 采用数字键 `1/2/3/0`：浏览器原生 `Ctrl+Shift+字母` 几乎都被占用（P=打印 / M=菜单 / B=Edge 收藏栏 / Y=史无前例的扩展 / N=无痕窗口 / K=浏览器自带等），而 `Ctrl+Shift+数字` 主流浏览器均未默认绑定，最大化避开冲突。
+> 如需改键，打开 `overlay.py` 修改 `<ctrl>+<shift>+1/2/3/0` 四处与 `handle_hotkey` 内 `if key == ...` 即可，再 PyInstaller 重新打包。
 
 ---
 
@@ -124,7 +124,7 @@ SUPER_EXAMTEST/
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│  用户按 Ctrl+Shift+Y                                          │
+│  用户按 Ctrl+Shift+1                                          │
 │         │                                                     │
 │         ▼                                                     │
 │  pynput 全局键盘钩子捕获组合键（系统级，浏览器拦截不到）         │
