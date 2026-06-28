@@ -1,0 +1,25 @@
+﻿# PyInstaller 构建产物
+build/
+dist/
+*.spec
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 测试与运行时日志
+*.log
+report.log
+se_answer.txt
+se_h.txt
+
+# 二进制发行版 - 通过 GitHub Releases 发布
+overlay.exe
+
+# IDE / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*~
